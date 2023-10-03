@@ -62,6 +62,11 @@ class Client extends AbstractServiceClient
         return $this->serviceScheme . '://' . $this->serviceDomain . '/' . $this->version . '/' . $resource;
     }
 
+    public function getServiceUrlNew($resource = '')
+    {
+        return $this->serviceScheme . '://' . $this->serviceDomain . '/' . $resource;
+    }
+
     /**
      * Get OAuth data for header request
      *

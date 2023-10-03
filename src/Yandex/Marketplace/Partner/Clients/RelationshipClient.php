@@ -42,7 +42,7 @@ class RelationshipClient extends Client
      *
      * @see https://yandex.ru/dev/market/partner-marketplace-cd/doc/dg/reference/post-campaigns-id-offer-mapping-entries-updates-docpage/
      *
-     * @param $campaignId
+     * @param $businessId
      * @param array $params
      * @param null $dbgKey
      * @return PostResponse
@@ -51,17 +51,16 @@ class RelationshipClient extends Client
      * @throws \Yandex\Common\Exception\UnauthorizedException
      * @throws \Yandex\Marketplace\Partner\Exception\PartnerRequestException
      */
-    public function updateRelationship($campaignId, array $params = [], $dbgKey = null)
+    public function updateRelationship($businessId, array $params = [], $dbgKey = null)
     {
-        $resource = 'campaigns/' . $campaignId . '/offer-mapping-entries/updates.json';
-        $resource = $this->addDebugKey($resource, $dbgKey);
+        $resource = 'businesses/' . $businessId . '/offer-mappings/update';
+//        $resource = $this->addDebugKey($resource, $dbgKey);
         $response = $this->sendRequest(
             'POST',
-            $this->getServiceUrl($resource),
+            $this->getServiceUrlNew($resource),
             ['json' => $params]
         );
         $decodedResponseBody = $this->getDecodedBody($response->getBody());
-
         return new PostResponse($decodedResponseBody);
     }
 
