@@ -42,7 +42,7 @@ class PriceClient extends Client
      *
      * @see https://yandex.ru/dev/market/partner-marketplace-cd/doc/dg/reference/post-campaigns-id-offer-prices-updates-docpage/
      *
-     * @param $campaignId
+     * @param $businessId
      * @param array $params
      * @param null $dbgKey
      * @return PostResponse
@@ -51,10 +51,10 @@ class PriceClient extends Client
      * @throws \Yandex\Common\Exception\UnauthorizedException
      * @throws \Yandex\Marketplace\Partner\Exception\PartnerRequestException
      */
-    public function updatePrices($campaignId, array $params = [], $dbgKey = null)
+    public function updatePrices($businessId, array $params = [], $dbgKey = null)
     {
-        $resource = 'campaigns/' . $campaignId . '/offer-prices/updates.json';
-        $resource = $this->addDebugKey($resource, $dbgKey);
+        $resource = 'businesses/' . $businessId . '/offer-prices/updates';
+//        $resource = $this->addDebugKey($resource, $dbgKey);
         $response = $this->sendRequest(
             'POST',
             $this->getServiceUrl($resource),
