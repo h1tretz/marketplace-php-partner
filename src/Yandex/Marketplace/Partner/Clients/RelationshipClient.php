@@ -64,6 +64,7 @@ class RelationshipClient extends Client
         return new PostResponse($decodedResponseBody);
     }
 
+
     /**
      * Returns a list of links between products on the  marketplace and products from catalog
      *
@@ -86,5 +87,18 @@ class RelationshipClient extends Client
         $decodedResponseBody = $this->getDecodedBody($response->getBody());
 
         return new GetActiveRelationshipResponse($decodedResponseBody);
+    }
+
+    public function getOfferCards($businessId, array $queryParams = [], array $params = [])
+    {
+        $resource = 'businesses/' . $businessId . '/offer-cards';
+        $resource .= '?' . $this->buildQueryString($queryParams);
+        $response = $this->sendRequest(
+            'POST',
+            $this->getServiceUrlNew($resource),
+            ['json' => $params]
+        );
+        $decodedResponseBody = $this->getDecodedBody($response->getBody());
+        return new PostResponse($decodedResponseBody);
     }
 }
