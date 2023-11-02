@@ -101,4 +101,15 @@ class RelationshipClient extends Client
         $decodedResponseBody = $this->getDecodedBody($response->getBody());
         return new PostResponse($decodedResponseBody);
     }
+
+    public function getCategoryParameters($categoryId)
+    {
+        $resource = 'category/' . $categoryId . '/parameters';
+        $response = $this->sendRequest(
+            'POST',
+            $this->getServiceUrlNew($resource)
+        );
+        $decodedResponseBody = $this->getDecodedBody($response->getBody());
+        return new PostResponse($decodedResponseBody);
+    }
 }
