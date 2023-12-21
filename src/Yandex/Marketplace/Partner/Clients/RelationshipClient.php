@@ -112,4 +112,17 @@ class RelationshipClient extends Client
         $decodedResponseBody = $this->getDecodedBody($response->getBody());
         return new PostResponse($decodedResponseBody);
     }
+
+    public function getOfferMappings($businessId, array $queryParams = [], array $params = [])
+    {
+        $resource = 'businesses/' . $businessId . '/offer-mappings';
+        $resource .= '?' . $this->buildQueryString($queryParams);
+        $response = $this->sendRequest(
+            'POST',
+            $this->getServiceUrlNew($resource),
+            ['json' => $params]
+        );
+        $decodedResponseBody = $this->getDecodedBody($response->getBody());
+        return new PostResponse($decodedResponseBody);
+    }
 }
